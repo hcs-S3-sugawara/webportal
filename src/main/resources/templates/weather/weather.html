@@ -67,19 +67,17 @@
 	<!-- コンテンツ -->
 	<div class="container">
 		<div class="content-box">
-			<h1>住所検索画面</h1>
-			<h2>郵便番号</h2>
-			<h3>検索結果</h3>
-			<ul th:each="result:${zipCodeEntity.results}"th:object="${result}">
-			<li><span th:text="*{zipcode}"></span></li>
-			<li><span th:text="*{address1}"></span></li>
-			<li><span th:text="*{address2}"></span></li>
-			<li><span th:text="*{address3}"></span></li>
-			<li><span th:text="*{kana1}"></span></li>
-			<li><span th:text="*{kana2}"></span></li>
-			<li><span th:text="*{kana3}"></span></li>
+			<h1>札幌市の天気予報</h1>
 			
+
+			<ul th:each="forecast:${weatherEntity.forecasts}">
+			<li><span th:text="*{forecast.dateLabel}"></span></li>
+			<li><span th:text="*{forecast.telop}"></span></li>
 			</ul>
+			
+				<h2>詳細</h2>
+			<p th:text=${weatherEntity.description}></p>
+			
 		</div>
 	</div>
 

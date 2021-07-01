@@ -85,6 +85,46 @@
 
 		</div>
 	</div>
+	
+	<!-- コンテンツ -->
+	<div class="container">
+		<div class="row">
+
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2><span style="font-family: serif">天気予報</span></h2>
+					<form method="post" th:action="@{/weather}">
+						<div class="input-group">
+							<input type="number" class="form-control" name="citycode"
+								placeholder="コード : XXXXXXX"> <span
+								class="input-group-btn">
+								<button type="submit" class="btn btn-dark">検索</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<!-- コンテンツ -->
+	<div class="container">
+		<div class="row">
+
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2><span style="font-family: serif">直近のタスク</span></h2>
+					<form method="post" th:action="@{/task}">
+						<div class="input-group">
+								<button type="submit" class="btn btn-dark" name = "task">タスク管理へ</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
 
 	<!-- 共通スクリプト -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

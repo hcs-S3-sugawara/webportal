@@ -67,20 +67,45 @@
 	<!-- コンテンツ -->
 	<div class="container">
 		<div class="content-box">
-			<h1>住所検索画面</h1>
-			<h2>郵便番号</h2>
-			<h3>検索結果</h3>
-			<ul th:each="result:${zipCodeEntity.results}"th:object="${result}">
-			<li><span th:text="*{zipcode}"></span></li>
-			<li><span th:text="*{address1}"></span></li>
-			<li><span th:text="*{address2}"></span></li>
-			<li><span th:text="*{address3}"></span></li>
-			<li><span th:text="*{kana1}"></span></li>
-			<li><span th:text="*{kana2}"></span></li>
-			<li><span th:text="*{kana3}"></span></li>
+			<h1>タスク管理</h1>
 			
-			</ul>
+			<hr>
+			
+			<form method="post"th:action="@{/task/insert}">
+			<div class="input-group">
+			<input type="text" class="form-control" name ="comment" placeholder="タスク内容">
+			<input type="date" class="form-control" name ="limitday">
+			<span class="input-group-btn">
+			<button type="submit" class="btn btn-warning">追加</button>
+			</span>
 		</div>
+		</form>
+		
+		<hr>
+		
+		<table class="table table-striped">
+		<tr>
+		<th>内容</th>
+		<th>期限</th>
+		</tr>
+		<tr th:each="task:${taskEntity.tasklist}">
+			<th th:text="${task.comment}"></th>
+			<th th:text="${task.limitday}"></th>
+		</tr>
+	</table>			
+		
+		<!--  <ul th:each="task:${taskEntity.taskList}">
+		<li><a th:eath="href="@{'/task/delete/'+ ${task.id}}">
+		<span th:text="${task.comment}"></span>
+		</a>
+		</ul>-->
+		
+		<hr>
+		
+		<form method="post" th:action="@{/task/csv}">
+		<button type="submit"class="btn btn-info">CSV出力</button>
+		</form>
+	</div>
 	</div>
 
 	<!-- 共通スクリプト -->
