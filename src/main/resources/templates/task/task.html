@@ -89,10 +89,13 @@
 		<th>期限</th>
 		</tr>
 		<tr th:each="task:${taskEntity.tasklist}">
-			<th th:text="${task.comment}"></th>
+		<th><a th:href="@{'/task/delete/'+ ${task.id}}"  onclick="return Delearem()">
+			<span th:text="${task.comment}"></span>
+			</a></th>
+			
 			<th th:text="${task.limitday}"></th>
 		</tr>
-	</table>			
+	</table>
 		
 		<!--  <ul th:each="task:${taskEntity.taskList}">
 		<li><a th:eath="href="@{'/task/delete/'+ ${task.id}}">
@@ -109,6 +112,23 @@
 	</div>
 
 	<!-- 共通スクリプト -->
+	
+	
+	<script>
+	function Delearem() {
+		let check = confirm("本当に削除しますか？");
+		
+		if(check) {
+			return true;
+		}else{
+			return false;
+		}
+		
+	}</script>
+	
+	
+	
+	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
