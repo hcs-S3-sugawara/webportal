@@ -22,6 +22,13 @@ public class TaskService {
 	@Autowired
 	TaskRepository taskRepository;
 	
+	
+	/**
+	 * サーバーに保存されているファイルを取得して表示する
+	 * @param user_id ユーザid
+	 * @return タスクエンティティ
+	 * @throws IOException ファイル取得エラー
+	 */
 	public TaskEntity selectAll(String userId) {
 		TaskEntity taskEntity;
 		try {
@@ -33,6 +40,13 @@ public class TaskService {
 		return taskEntity;
 	}
 
+	/**
+	 * タスクを追加する
+	 * @param user_id ファイル名
+	 * @param comment　入力されたタスク内容
+	 * @param limitday 日付
+	 * @throws IOException ファイル取得エラー
+	 */
 	public void InsertTask(String user_id, String comment, String limitday) {
 		TaskData taskData = new TaskData();
 		
@@ -76,7 +90,13 @@ public class TaskService {
 		return bytes;
 	}
 	
-	public boolean delete(int id) {
+	/**
+	 * 保存されているタスクの削除（１件）する
+	 * @param id タスク情報
+	 * @return タスクのid
+	 * @throws IOException ファイル取得エラー
+	 */
+	public boolean deleteOne(int id) {
 		int count;
 		try {
 			count = taskRepository.deleteOne(id);

@@ -22,7 +22,11 @@ import jp.ac.hcs.s3a117.WebConfig;
 public class TaskController {
 	@Autowired
 	private TaskService taskService;
-	/**
+	/**  
+	 * 登録されているタスクの一覧を表示する
+	 * @return task タスクの内容
+	 * @return principal ログイン情報
+	 * @return model 
 	 * @return　結果画面　―　タスク一覧
 	 */
 	
@@ -36,6 +40,14 @@ public class TaskController {
 		 
 	 }
 	
+	/**
+	 * タスクの追加をする
+	 * @param comment　入力されたタスク内容
+	 * @param limitday 入力された日付
+	 * @param principal　ログイン情報
+	 * @param model
+	 * @return　結果画面　―　タスク一覧
+	 */
 	@PostMapping("/task/insert")
 	public String getComment(@RequestParam("comment") String comment,
 								@RequestParam("limitday") String limitday,Principal principal, Model model) {
@@ -83,18 +95,18 @@ public class TaskController {
 		return new ResponseEntity<byte[]>(bytes,header,HttpStatus.OK);
 	}
 	
-	
+	/**
+	 * 登録されているタスクの削除（一件）する
+	 * @param id タスク情報
+	 * @param principal　ログイン情報
+	 * @param model
+	 * @return　結果画面　―　タスク一覧
+	 */
 	@GetMapping("/task/delete/{id}")
 	public String deleteTask(@PathVariable("id")  int id,Principal principal, Model model) {
-		 System.out.println(id);
-		boolean isSuccess = taskService.delete(id);
-		if (isSuccess) {
-			model.addAttribute("message","正常に削除されました");
-		} else {
-			model.addAttribute("errorMessage","削除されませんでした。再度操作をやり直してください");
-		}
 		
-		 
+		 taskService.deleteOne(id);
+
 		 return getTask(principal,model);
 		 
 	 }

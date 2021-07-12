@@ -83,12 +83,6 @@
 				</div>
 			</div>
 
-		</div>
-	</div>
-	
-	<!-- コンテンツ -->
-	<div class="container">
-		<div class="row">
 
 			<div class="col-sm-6">
 				<div class="content-box">
@@ -122,6 +116,34 @@
 					</form>
 				</div>
 			</div>
+			
+			
+	<div class="col-sm-6">
+				<div class="content-box">
+					<h2><span style="font-family: serif">グルメ検索</span></h2>
+					<form method="post" th:action="@{/gourmet}">
+						<div class="input-group">
+								<input type="text" class="form-control" name="shopname"
+								placeholder="料理名"> <span
+								class="input-group-btn">
+								<button type="submit" class="btn btn-dark">検索</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+	
+	
+	<div class="col-sm-6" role = "presentation" sec:authorize = "hasRole('ADMIN')">
+	
+		<div class="content-box">
+			<h2>ユーザ管理</h2>
+			<form method="get" th:action="@{/user/list}">
+				<button type="submit" class="btn btn-success">ユーザ管理へ</button>
+				</form>
+		</div>
+	</div>
+	
 
 		</div>
 	</div>

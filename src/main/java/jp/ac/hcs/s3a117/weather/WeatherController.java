@@ -13,11 +13,11 @@ public class WeatherController {
 	@Autowired
 	private WeatherService weatherService;
 	/**
-	 * 郵便番号から住所を検索し、結果画面を表示する
-	 * @param zipcode　検索する郵便番号（ハイフン無し）
+	 * 地域コードからその地域の天気の詳細を検索し、結果画面を表示する
+	 * @param citycode　検索する地域コード（ハイフン無し）
 	 * @param principal　ログイン情報
 	 * @param model
-	 * @return　結果画面　―　郵便番号
+	 * @return　結果画面　―　天気
 	 */
 	
 	@PostMapping("/weather")

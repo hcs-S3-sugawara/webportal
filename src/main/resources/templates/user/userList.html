@@ -67,67 +67,56 @@
 	<!-- コンテンツ -->
 	<div class="container">
 		<div class="content-box">
-			<h1>タスク管理</h1>
+			<h1>ユーザ一覧</h1>
 			
-			<hr>
 			
-			<form method="post"th:action="@{/task/insert}">
-			<div class="input-group">
-			<input type="text" class="form-control" name ="comment" placeholder="タスク内容">
-			<input type="date" class="form-control" name ="limitday">
-			<span class="input-group-btn">
-			<button type="submit" class="btn btn-warning">追加</button>
-			</span>
-		</div>
-		</form>
 		
 		<hr>
-		
-		<table class="table table-striped">
+	<div class="table-responsive">
+		<table class="table table-hover">
+		<thead class="table-dark">
 		<tr>
-		<th>内容</th>
-		<th>期限</th>
+		<th>ユーザID</th>
+		<th>アカウント有効性</th>
+		<th>ユーザ名</th>
+		<th>ダークモード</th>
+		<th>権限</th>
+		<th>詳細</th>
 		</tr>
-		<tr th:each="task:${taskEntity.tasklist}">
-		<th><a th:href="@{'/task/delete/'+ ${task.id}}"  onclick="return Delearem()">
-			<span th:text="${task.comment}"></span>
-			</a></th>
-			
-			<th th:text="${task.limitday}"></th>
+		</thead>
+		
+		
+		<tbody class="table-light">
+		<tr th:each="user:${userEntity.userlist}">
+		<th th:text= "${user.user_id}"></th>
+		<th th:switch= "${user.enabled}">
+			<p th:case="false">無効</p>
+			<p th:case="true">有効</p>
+		</th>
+		<th th:text="${user.user_name}"></th>
+		<th th:switch= "${user.darkmode}">
+			<p th:case="false">無効</p>
+			<p th:case="true">有効</p>
+		</th>
+		<th th:text= "${user.role}"></th>
+		<th><a class="btn btn-success" th:href="@{'/user/detail/' + *{user.user_id}}">詳細</a></th>
+
+		
 		</tr>
+		</tbody>
+		
 	</table>
-		
-		<!--  <ul th:each="task:${taskEntity.taskList}">
-		<li><a th:eath="href="@{'/task/delete/'+ ${task.id}}">
-		<span th:text="${task.comment}"></span>
-		</a>
-		</ul>-->
-		
-		<hr>
-		
-		<form method="post" th:action="@{/task/csv}">
-		<button type="submit"class="btn btn-info">CSV出力</button>
+	</div>
+	<form method="get" th:action="@{/user/insert}">
+			<span class="input-group-btn">
+			<button type="submit" class="btn btn-warning">作成</button>
+			</span>
 		</form>
+	
 	</div>
 	</div>
 
 	<!-- 共通スクリプト -->
-	
-	
-	<script>
-	function Delearem() {
-		let check = confirm("本当に削除しますか？");
-		
-		if(check) {
-			return true;
-			
-		}else{
-			return false;
-		}
-		
-	}</script>
-	
-	
 	
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

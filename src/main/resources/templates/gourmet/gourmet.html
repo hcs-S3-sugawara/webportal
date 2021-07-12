@@ -67,69 +67,21 @@
 	<!-- コンテンツ -->
 	<div class="container">
 		<div class="content-box">
-			<h1>タスク管理</h1>
+			<h1>北海道グルメ</h1>
+
+			<h3>検索結果</h3>
+			<ul th:each="shoplist:${shopEntity.shoplist}">
+			<li><a th:href="*{shoplist.url}" target="new" th:text="*{shoplist.name}"></a></li>
+			<li><img class="logo_image" th:src="*{shoplist.logo_image}"></img></li>
+			<li><a th:href="'https://www.google.com/maps/search/?api=1&query=' + *{shoplist.address}" target="new" th:text="*{shoplist.address}" ></a></li>
+			<li><span th:text="*{shoplist.access}"></span></li>
+			<!--  <li><span th:text="*{shoplist.image}"></span></li>-->
 			
-			<hr>
-			
-			<form method="post"th:action="@{/task/insert}">
-			<div class="input-group">
-			<input type="text" class="form-control" name ="comment" placeholder="タスク内容">
-			<input type="date" class="form-control" name ="limitday">
-			<span class="input-group-btn">
-			<button type="submit" class="btn btn-warning">追加</button>
-			</span>
+			</ul>
 		</div>
-		</form>
-		
-		<hr>
-		
-		<table class="table table-striped">
-		<tr>
-		<th>内容</th>
-		<th>期限</th>
-		</tr>
-		<tr th:each="task:${taskEntity.tasklist}">
-		<th><a th:href="@{'/task/delete/'+ ${task.id}}"  onclick="return Delearem()">
-			<span th:text="${task.comment}"></span>
-			</a></th>
-			
-			<th th:text="${task.limitday}"></th>
-		</tr>
-	</table>
-		
-		<!--  <ul th:each="task:${taskEntity.taskList}">
-		<li><a th:eath="href="@{'/task/delete/'+ ${task.id}}">
-		<span th:text="${task.comment}"></span>
-		</a>
-		</ul>-->
-		
-		<hr>
-		
-		<form method="post" th:action="@{/task/csv}">
-		<button type="submit"class="btn btn-info">CSV出力</button>
-		</form>
-	</div>
 	</div>
 
 	<!-- 共通スクリプト -->
-	
-	
-	<script>
-	function Delearem() {
-		let check = confirm("本当に削除しますか？");
-		
-		if(check) {
-			return true;
-			
-		}else{
-			return false;
-		}
-		
-	}</script>
-	
-	
-	
-	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>

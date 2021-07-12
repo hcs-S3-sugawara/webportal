@@ -67,67 +67,59 @@
 	<!-- コンテンツ -->
 	<div class="container">
 		<div class="content-box">
-			<h1>タスク管理</h1>
-			
-			<hr>
-			
-			<form method="post"th:action="@{/task/insert}">
-			<div class="input-group">
-			<input type="text" class="form-control" name ="comment" placeholder="タスク内容">
-			<input type="date" class="form-control" name ="limitday">
-			<span class="input-group-btn">
-			<button type="submit" class="btn btn-warning">追加</button>
-			</span>
+			<h2>ユーザ登録</h2>
+			<p>（管理者用）</p>
+
+			<div class="input-form">
+				<form method="post" th:action="@{/user/insert}"
+					th:object="${userForm}">
+
+					<label for="user_id">ユーザID(メールアドレス)</label>
+					<div class="form-group input-box"
+						th:classappend="${#fields.hasErrors('user_id')} ? 'has-error'">
+						<input type="text" class="form-control" name="user_id"
+							placeholder="xxxxxxx@xxx.xxx" th:field="*{user_id}"> <span
+							class="text-danger" th:if="${#fields.hasErrors('user_id')}"
+							th:errors="*{user_id}">user_id error</span>
+					</div>
+
+					<label for="password">パスワード</label>
+					<div class="form-group input-box"
+						th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
+						<input type="password" class="form-control" name="password"
+							placeholder="xxxxxxxx" th:field="*{password}"> <span
+							class="text-danger" th:if="${#fields.hasErrors('password')}"
+							th:errors="*{password}">password error</span>
+					</div>
+
+					<label for="user_name">ユーザ名</label>
+					<div class="form-group input-box"
+						th:classappend="${#fields.hasErrors('user_name')} ? 'has-error'">
+						<input type="text" class="form-control" name="user_name"
+							placeholder="情報 太郎" th:field="*{user_name}"> <span
+							class="text-danger" th:if="${#fields.hasErrors('user_name')}"
+							th:errors="*{user_name}">user_name error</span>
+					</div>
+
+					<label for="role">権限設定</label>
+					<div class="form-group input-box">
+						<div>
+							<input type="radio" name="role" value="ROLE_ADMIN" id="role1">管理
+						</div>
+						<div>
+							<input type="radio" name="role" value="ROLE_GENERAL" id="role2">一般
+						</div>
+						<span class="text-danger" th:if="${#fields.hasErrors('role')}"
+							th:errors="*{role}">role error</span>
+					</div>
+
+					<button type="submit" class="btn btn-warning">登録</button>
+				</form>
+			</div>
 		</div>
-		</form>
-		
-		<hr>
-		
-		<table class="table table-striped">
-		<tr>
-		<th>内容</th>
-		<th>期限</th>
-		</tr>
-		<tr th:each="task:${taskEntity.tasklist}">
-		<th><a th:href="@{'/task/delete/'+ ${task.id}}"  onclick="return Delearem()">
-			<span th:text="${task.comment}"></span>
-			</a></th>
-			
-			<th th:text="${task.limitday}"></th>
-		</tr>
-	</table>
-		
-		<!--  <ul th:each="task:${taskEntity.taskList}">
-		<li><a th:eath="href="@{'/task/delete/'+ ${task.id}}">
-		<span th:text="${task.comment}"></span>
-		</a>
-		</ul>-->
-		
-		<hr>
-		
-		<form method="post" th:action="@{/task/csv}">
-		<button type="submit"class="btn btn-info">CSV出力</button>
-		</form>
-	</div>
 	</div>
 
 	<!-- 共通スクリプト -->
-	
-	
-	<script>
-	function Delearem() {
-		let check = confirm("本当に削除しますか？");
-		
-		if(check) {
-			return true;
-			
-		}else{
-			return false;
-		}
-		
-	}</script>
-	
-	
 	
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
